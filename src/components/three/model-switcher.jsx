@@ -29,7 +29,7 @@ const ModelSwitcher = ({ scale, isMobile }) => {
   const largeMacbookRef = useRef();
   const smallMacbookRef = useRef();
 
-  const SCALE_LARGE_DESKTOP = 128;
+  const SCALE_LARGE_DESKTOP = 0.128;
   const SCALE_LARGE_MOBILE = 0.08;
 
   const showLargeMacbook = scale === SCALE_LARGE_DESKTOP || scale === SCALE_LARGE_MOBILE;
