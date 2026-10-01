@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 
 /**
  * Renders the M4 video showcase and performance highlights.
- * Enables the pinned scroll animation on viewports wider than 1023 pixels.
+ * Enables pinned scrolling above 1023 pixels when reduced motion is not preferred.
  *
  * @returns {import("react").ReactElement} The showcase section.
  */
@@ -15,28 +15,42 @@ const ShowCase = () => {
   const isTablet = useMediaQuery({ query: "(max-width: 1023px)" });
 
   useGSAP(() => {
-    if (!isTablet) {
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#showcase",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-          pin: true,
-        },
-      });
-      timeline
-        .to(".mask img", {
-          scale: 1.1,
-        })
-        .to(".content", {
-          opacity: 1,
-          y: 0,
-          ease: "power1.in",
-          duration:0.1,
-        });
-    }
-  }, [isTablet]);
+    const media = gsap.matchMedia();
+
+    media.add(
+      {
+        reduceMotion: "(prefers-reduced-motion: reduce)",
+        noPreference: "(prefers-reduced-motion: no-preference)",
+      },
+      (context) => {
+        if (context.conditions.reduceMotion || isTablet) {
+          gsap.set("#showcase .content", { opacity: 1, y: 0 });
+        } else {
+          const timeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: "#showcase",
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+              pin: true,
+            },
+          });
+          timeline
+            .to(".mask img", {
+              scale: 1.1,
+            })
+            .to(".content", {
+              opacity: 1,
+              y: 0,
+              ease: "power1.in",
+              duration: 0.1,
+            });
+        }
+      },
+    );
+
+    return () => media.revert();
+  }, { dependencies: [isTablet], revertOnUpdate: true });
 
   return (
     <section id="showcase">
