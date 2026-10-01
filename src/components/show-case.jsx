@@ -5,6 +5,12 @@ import gsap from "gsap";
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 
+/**
+ * Renders the M4 video showcase and performance highlights.
+ * Enables the pinned scroll animation on viewports wider than 1023 pixels.
+ *
+ * @returns {import("react").ReactElement} The showcase section.
+ */
 const ShowCase = () => {
   const isTablet = useMediaQuery({ query: "(max-width: 1023px)" });
 

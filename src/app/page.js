@@ -8,6 +8,11 @@ import { ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * Renders the MacBook landing page with navigation, hero, product viewer, and showcase.
+ *
+ * @returns {import("react").ReactElement} The landing page content.
+ */
 export default function Home() {
   return (
     <main>
