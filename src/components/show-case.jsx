@@ -2,17 +2,18 @@
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import React from "react";
-import { useMediaQuery } from "react-responsive";
+import React, { useRef } from "react";
+import { useIsTablet } from "@/hooks/useIsTablet";
 
 const ShowCase = () => {
-  const isTablet = useMediaQuery({ query: "(max-width: 1023px)" });
+  const sectionRef = useRef(null);
+  const isTablet = useIsTablet();
 
   useGSAP(() => {
     if (!isTablet) {
       const timeline = gsap.timeline({
         scrollTrigger: {
-          trigger: "#showcase",
+          trigger: sectionRef.current,
           start: "top top",
           end: "bottom top",
           scrub: true,
@@ -30,10 +31,10 @@ const ShowCase = () => {
           duration:0.1,
         });
     }
-  }, [isTablet]);
+  }, { scope: sectionRef, dependencies: [isTablet], revertOnUpdate: true });
 
   return (
-    <section id="showcase">
+    <section id="showcase" ref={sectionRef}>
       <div className="media">
         <video src="/videos/game.mp4" loop autoPlay playsInline muted />
         <div className="mask">

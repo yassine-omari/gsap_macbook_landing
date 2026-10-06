@@ -5,12 +5,12 @@ import clsx from "clsx";
 import React from "react";
 import StudioLights from "./three/studio-lights";
 import ModelSwitcher from "./three/model-switcher";
-import { useMediaQuery } from "react-responsive";
+import { useIsTablet } from "@/hooks/useIsTablet";
 
 const ProductViewer = () => {
   const { color, scale, setScale, setColor } = useMacbookStore();
 
-  const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
+  const isMobile = useIsTablet();
   return (
     <section id="product-viewer">
       <h2>Take a closer look.</h2>

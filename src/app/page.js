@@ -1,6 +1,10 @@
 "use client"
+import Features from "@/components/Features";
+import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import Highlights from "@/components/Highlights";
 import NavBar from "@/components/NavBar";
+import Performance from "@/components/Performance";
 import ProductViewer from "@/components/product-viewer";
 import ShowCase from "@/components/show-case";
 import gsap from "gsap";
@@ -15,6 +19,10 @@ export default function Home() {
       <Hero />
       <ProductViewer />
       <ShowCase />
+      <Performance />
+      <Features />
+      <Highlights />
+      <Footer />
     </main>
   );
 }
